@@ -1,7 +1,6 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Programming Assingment 2 - R Programming
 
-## Write a short comment describing this function
+##makeCacheMatrix generates a matrix able to cache its inverse.
 
 makeCacheMatrix<-function(x  = matrix()){
         inve<-NULL
@@ -11,21 +10,23 @@ makeCacheMatrix<-function(x  = matrix()){
                 
         }
         get<-function()x
-        setinve<-function(val) inve <<- val
+        setinve<-function(solve) inve <<- solve
         getinve<-function() inve
         list(set = set,get = get, setinve = setinve, getinve = getinve)
 }
 
-## Write a short comment describing this function
+## cacheSolve generates the inverse of a matrix returned by makeCacheMatrix!
 
 cacheSolve<-function(x,...){
-                ## Return a matrix that is the inverse of 'x'
+        ## Return a matrix that is the inverse of 'x'
         inve<-x$getinve()
         if(!is.null(inve)){
+                ##no changes made in the matrix, then retrieve it from cached
                 message("getting cached data!")
                 return(inve)
         }
-        datav<- x$get()
-        inve <- setinve(inve)
+        dat<- x$get()
+        inve <- solve(data,...)
+        x$setinve(inve)
         inve
 }
